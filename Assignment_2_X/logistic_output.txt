@@ -1,0 +1,180 @@
+
+===============================================================
+============ Task 1: Exploratory Data Analysis ===============
+===============================================================
+
+1a) Summarizing numeric columns: mean_radius, mean_texture, etc.
+
+Summary for mean_radius:
+  Count: 194
+  Mean: 17.412
+  Std: 3.157
+  Min: 10.950
+  25%: 15.053
+  50%: 17.280
+  75%: 19.580
+  Max: 27.220
+
+Summary for mean_texture:
+  Count: 194
+  Mean: 22.319
+  Std: 4.283
+  Min: 10.380
+  25%: 19.518
+  50%: 21.795
+  75%: 24.655
+  Max: 39.280
+
+Summary for mean_perimeter:
+  Count: 198
+  Mean: 114.857
+  Std: 21.383
+  Min: 71.900
+  25%: 98.160
+  50%: 113.700
+  75%: 129.650
+  Max: 182.100
+
+Summary for mean_area:
+  Count: 198
+  Mean: 970.041
+  Std: 352.149
+  Min: 361.600
+  25%: 702.525
+  50%: 929.100
+  75%: 1193.500
+  Max: 2250.000
+
+Summary for mean_smoothness:
+  Count: 198
+  Mean: 0.103
+  Std: 0.013
+  Min: 0.075
+  25%: 0.094
+  50%: 0.102
+  75%: 0.111
+  Max: 0.145
+
+Summary for mean_compactness:
+  Count: 198
+  Mean: 0.143
+  Std: 0.050
+  Min: 0.046
+  25%: 0.110
+  50%: 0.132
+  75%: 0.172
+  Max: 0.311
+
+Summary for mean_concavity:
+  Count: 198
+  Mean: 0.156
+  Std: 0.071
+  Min: 0.024
+  25%: 0.107
+  50%: 0.151
+  75%: 0.201
+  Max: 0.427
+
+Summary for mean_concave_points:
+  Count: 198
+  Mean: 0.087
+  Std: 0.034
+  Min: 0.020
+  25%: 0.064
+  50%: 0.086
+  75%: 0.104
+  Max: 0.201
+
+1b) Summarizing the categorical variable 'outcome'...
+Outcome summary:
+  Count: 198
+  Unique Values: ['R', 'N']
+  Top Value: N
+  Frequency of Top Value: 151
+
+1c) Encoding outcome from N/Y to 0/1 ...
+Outcome encoding complete.
+
+1d) Checking for redundant features.
+No actual removal done, but you'd remove them if you find e.g. 'id' or 100%-correlated columns.
+
+1e) Calculating correlation between mean_perimeter and se_perimeter (if present)...
+Correlation(mean_perimeter, se_perimeter) = 0.610
+
+===============================================================
+====== Task 2: Logistic Regression with One Variable ==========
+===============================================================
+
+2a) Training logistic regression on 'mean_area' ...
+
+Confusion Matrix (Train): [[120   0]
+ [  0   0]]
+Confusion Matrix (Test): [[31  0]
+ [ 0  0]]
+Train Accuracy: 1.000, Test Accuracy: 1.000
+
+===============================================================
+===== Task 3: Logistic Regression with Multiple Variables =====
+===============================================================
+
+3a) Using these 12 features to predict outcome ...
+['mean_radius', 'mean_texture', 'mean_perimeter', 'mean_area', 'mean_smoothness', 'mean_compactness', 'mean_concavity', 'mean_concave_points', 'mean_fractal_dimension', 'se_perimeter', 'se_texture', 'se_area']
+
+Confusion Matrix (Train): [[116   0]
+ [  0   0]]
+Confusion Matrix (Test): [[31  0]
+ [ 0  0]]
+Train Accuracy: 1.000, Test Accuracy: 1.000
+
+3b) Forward selection from the same 12 features ...
+Selected features: ['mean_area', 'mean_perimeter', 'mean_texture', 'se_area', 'mean_radius', 'se_perimeter', 'se_texture', 'mean_compactness', 'mean_concavity', 'mean_smoothness', 'mean_concave_points', 'mean_fractal_dimension']
+History of selection steps:
+{'selected_features': ['mean_area'], 'cost_value': np.float64(3.1898098719847253e-10)}
+{'selected_features': ['mean_area', 'mean_perimeter'], 'cost_value': np.float64(1.7421881130684726e-10)}
+{'selected_features': ['mean_area', 'mean_perimeter', 'mean_texture'], 'cost_value': np.float64(1.5524087271724018e-10)}
+{'selected_features': ['mean_area', 'mean_perimeter', 'mean_texture', 'se_area'], 'cost_value': np.float64(1.3957597455517241e-10)}
+{'selected_features': ['mean_area', 'mean_perimeter', 'mean_texture', 'se_area', 'mean_radius'], 'cost_value': np.float64(1.2614597569189782e-10)}
+{'selected_features': ['mean_area', 'mean_perimeter', 'mean_texture', 'se_area', 'mean_radius', 'se_perimeter'], 'cost_value': np.float64(1.2604194587893114e-10)}
+{'selected_features': ['mean_area', 'mean_perimeter', 'mean_texture', 'se_area', 'mean_radius', 'se_perimeter', 'se_texture'], 'cost_value': np.float64(1.2602598833689088e-10)}
+{'selected_features': ['mean_area', 'mean_perimeter', 'mean_texture', 'se_area', 'mean_radius', 'se_perimeter', 'se_texture', 'mean_compactness'], 'cost_value': np.float64(1.2602562464313588e-10)}
+{'selected_features': ['mean_area', 'mean_perimeter', 'mean_texture', 'se_area', 'mean_radius', 'se_perimeter', 'se_texture', 'mean_compactness', 'mean_concavity'], 'cost_value': np.float64(1.2602530210420058e-10)}
+{'selected_features': ['mean_area', 'mean_perimeter', 'mean_texture', 'se_area', 'mean_radius', 'se_perimeter', 'se_texture', 'mean_compactness', 'mean_concavity', 'mean_smoothness'], 'cost_value': np.float64(1.2602515471252093e-10)}
+{'selected_features': ['mean_area', 'mean_perimeter', 'mean_texture', 'se_area', 'mean_radius', 'se_perimeter', 'se_texture', 'mean_compactness', 'mean_concavity', 'mean_smoothness', 'mean_concave_points'], 'cost_value': np.float64(1.2602508484503648e-10)}
+{'selected_features': ['mean_area', 'mean_perimeter', 'mean_texture', 'se_area', 'mean_radius', 'se_perimeter', 'se_texture', 'mean_compactness', 'mean_concavity', 'mean_smoothness', 'mean_concave_points', 'mean_fractal_dimension'], 'cost_value': np.float64(1.260250255055291e-10)}
+
+Confusion Matrix (Train): [[116   0]
+ [  0   0]]
+Confusion Matrix (Test): [[31  0]
+ [ 0  0]]
+Train Accuracy: 1.000, Test Accuracy: 1.000
+
+3c) Comparing 12-feature model vs. forward-selected subset:
+Full model test accuracy: 1.000
+Forward subset test accuracy: 1.000
+
+===============================================================
+=== Task 4: Regularization and Alternative Cost Functions ====
+===============================================================
+
+4a) Regularization and Feature Scaling on best model from 3c...
+
+4a-I) L2 Regularization on forward-selected model ...
+
+Confusion Matrix (Test, Regularized): [[31  0]
+ [ 0  0]]
+Test Accuracy (Reg): 1.000 vs. Non-reg: 1.000
+
+4a-II) Feature Scaling using z-score standardization ...
+
+Confusion Matrix (Test, Feature-Scaled): [[31  0]
+ [ 0  0]]
+Test Accuracy (Scaled): 1.000 vs. Baseline: 1.000
+
+4b) Changing cost function from cross-entropy to MSE (logistic setup) ...
+4b-I) Fitting logistic with MSE cost ...
+
+Confusion Matrix (Test, MSE-based): [[31  0]
+ [ 0  0]]
+Test Accuracy (MSE cost): 1.000 vs. Cross-Entropy: 1.000
+
+4b-II) Observations: Did MSE cost yield different solution or accuracy?

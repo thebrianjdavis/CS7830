@@ -1,0 +1,139 @@
+
+===============================================================
+============ Task 1: Single Feature (mean_texture) ============
+===============================================================
+Train MSE: 4.617, Test MSE: 1.806
+Train R^2: -0.043, Test R^2: -0.682
+Train Adj R^2: -0.050, Test Adj R^2: -0.728
+
+Task 1: Single Feature Notes
+There aren't many notes for the first task, given that it is 
+establishing a baseline for the assignment. The negative R^2 
+and Adj R^2 scores on both the train and test sets suggests 
+that mean_texture by itself has weak linear correlation with 
+tumor_size in this dataset. Thus the single feature isn't a 
+good predictor for this purpose.
+
+===============================================================
+=== Task 2: Two Features (mean_texture + lymph_node_status) ===
+===============================================================
+Train MSE: 3.419, Test MSE: 1.525
+Train R^2: 0.228, Test R^2: -0.420
+Train Adj R^2: 0.217, Test Adj R^2: -0.501
+
+Task 2: Two-Feature Notes
+Using two features definitely performed better than one. Lower 
+MSE in both train and test shows that this model is fitting the 
+data better than using the single feature as in task 1. In this 
+task R^2 was positive in the train set, which explains some 
+variance, but R^2 was negative in the test set (so it is under-
+performing on this subset). The negative R^2 on the test set 
+implies that the model is still not strongly predictive.
+
+Did task 2's model show improvement on the usage of a single 
+feature?
+
+=== Adding 'lymph_node_status' ===
+Improved both Test MSE (lower) and Test R^2 (higher).
+
+===============================================================
+============ Task 3a: Forward Stepwise Regression =============
+===============================================================
+Selected Features (Forward): ['mean_perimeter', 'lymph_node_status']
+History of additions:
+{'iteration': 1, 'chosen_feature': 'mean_perimeter', 'metric_value': 232.5952015702297, 'features_set': ['mean_perimeter']}
+{'iteration': 2, 'chosen_feature': 'lymph_node_status', 'metric_value': 193.5587006847, 'features_set': ['mean_perimeter', 'lymph_node_status']}
+Forward Stepwise - Train MSE: 3.236, Test MSE: 1.237
+Forward Stepwise - Train R^2: 0.269, Test R^2: -0.152
+Forward Stepwise - Train Adj R^2: 0.259, Test Adj R^2: -0.218
+
+===============================================================
+============ Task 3b: Backward Stepwise Regression ============
+===============================================================
+Selected Features (Backward): ['mean_radius', 'mean_perimeter', 'mean_area', 'mean_smoothness', 'mean_symmetry', 'mean_fractal_dimension', 'worst_radius', 'worst_area', 'worst_symmetry', 'lymph_node_status']
+History of removals:
+Backward Stepwise - Train MSE: nan, Test MSE: nan
+Backward Stepwise - Train R^2: nan, Test R^2: nan
+Backward Stepwise - Train Adj R^2: nan, Test Adj R^2: nan
+
+===============================================================
+======== Task 3c: Compare Forward vs. Backward Models =========
+===============================================================
+
+Did the backward linear regression model perform better than 
+the forward linear regression?
+
+=== Forward vs. Backward Stepwise ===
+No improvement in Test MSE or R^2.
+
+===============================================================
+====== Task 3d: Compare Stepwise with Two-Feature Model =======
+===============================================================
+
+Did task 3's models show improvement on the two-feature linear 
+regression model?
+
+=== Two-Feature vs. Forward Stepwise ===
+Improved both Test MSE (lower) and Test R^2 (higher).
+
+=== Two-Feature vs. Backward Stepwise ===
+No improvement in Test MSE or R^2.
+
+Task 3: Stepwise Linear Regression Notes
+The forward stepwise process determined that mean_perimeter and 
+lymph_node_status gave the best improvement in terms of BIC for 
+each iteration. The test MSE showed an improvement over both 
+test MSE scores in task 1 and task 2. The test R^2 was still 
+negative, but less negative than in task 1 or 2's results, so it 
+is improving. So forward stepwise outperforms both earlier, 
+simpler models. The backward stepwise process ended up with all 
+10 of its features still listed, but the MSE and R^2 values are 
+NaN, indicating that the model diverged and was unable to 
+produce a stable result. In the comparison for forward stepwise 
+and backward stepwise, backward cannot show any improvement 
+since it didn't produce a result. Same with backward stepwise 
+and the two-feature model.
+
+===============================================================
+================= Task 4a: L2 Regularization ==================
+===============================================================
+Regularized Model (lambda=1.0):
+Train MSE: 3.281, Test MSE: 1.194
+Train R^2: 0.259, Test R^2: -0.112
+
+=== L2 Regularization vs. Baseline ===
+Improved both Test MSE (lower) and Test R^2 (higher).
+
+===============================================================
+================== Task 4b: Feature Scaling ===================
+===============================================================
+Scaled Model (no regularization):
+Train MSE: 3.214, Test MSE: 1.220
+Train R^2: 0.274, Test R^2: -0.136
+
+=== Feature Scaling vs. Baseline ===
+Improved both Test MSE (lower) and Test R^2 (higher).
+
+Scaled + Regularized (lambda=1.0):
+Train MSE: 3.214, Test MSE: 1.216
+Train R^2: 0.274, Test R^2: -0.133
+
+=== Scaled+Regularized vs. Baseline ===
+Improved both Test MSE (lower) and Test R^2 (higher).
+
+=== Scaled+Regularized vs. Feature Scaling ===
+Improved both Test MSE (lower) and Test R^2 (higher).
+
+Task 4: Regularization and Featuring Scaling Notes
+As the comparison logs showed, test MSE and R^2 continued to 
+improve relative to the baseline for forward stepwise regression.
+The R^2 was the highest (least negative), so regularization 
+still slightly improved the generalization. Feature scaling 
+performed slightly worse than regularization in terms of both 
+MSE and R^2. Interestingly, the combination of regularization 
+and feature scaling performed worse than just regularization on 
+the forward stepwise regression model. The MSE and R^2 for the 
+combined regularization and feature scaling model was still 
+better than the feature scaling model alone. So overall the best 
+performing ended up being forward stepwise regression with 
+regularization.

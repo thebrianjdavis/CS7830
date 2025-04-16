@@ -1,0 +1,35 @@
+This dataset contains follow-up information for individual breast cancer cases.
+Features:
+	ID: A unique identifier for each case.
+	Outcome:
+		R: Recurrence of the cancer.
+		N: No recurrence of the cancer.
+	Time:
+		If Outcome = R: Time elapsed until cancer recurrence.
+		If Outcome = N: Disease-free time (time elapsed since diagnosis without 				cancer recurrence).
+	Cell Nuclei Features:
+		For each cell nucleus, ten real-valued features were calculated, describing 		its characteristics:
+
+	Radius: Mean distance from the center to points on the perimeter.
+	Texture: Standard deviation of gray-scale values.
+	Perimeter: Total length of the cell's boundary.
+	Area: Surface area of the cell.
+	Smoothness: Local variation in radius lengths.
+	Compactness: A measure of shape irregularity (perimeter^2 / area - 1.0).
+	Concavity: Severity of concave portions of the cell's contour.
+	Concave Points: Number of concave portions of the contour.
+	Symmetry: Degree of symmetry in the cell's shape.
+	Fractal Dimension: A measure of the cell's complexity (coastline approximation - 1).
+
+
+
+	For each of these features, the following were computed:
+
+	Mean: Average value of the feature across all cell nuclei.
+	Standard Error: Standard deviation of the feature across all cell nuclei.
+	Worst: Mean of the three largest values of the feature.
+
+	Additional Features:
+
+	Tumor Size: Diameter of the excised tumor in centimeters.
+	Lymph Node Status: Number of axillary lymph nodes (lymph nodes under the arm) that 			   tested positive for cancer at the time of surgery.

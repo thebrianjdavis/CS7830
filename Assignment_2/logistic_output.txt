@@ -1,0 +1,56 @@
+===== EDA: Numeric Summaries =====
+mean_radius -> {'count': 194, 'mean': np.float64(17.412061855670103), 'std': np.float64(3.157181447185855), 'min': np.float64(10.95), '25%': np.float64(15.0525), '50%': np.float64(17.28), '75%': np.float64(19.58), 'max': np.float64(27.22)}
+mean_texture -> {'count': 194, 'mean': np.float64(22.319020618556703), 'std': np.float64(4.283068191040898), 'min': np.float64(10.38), '25%': np.float64(19.517500000000002), '50%': np.float64(21.795), '75%': np.float64(24.655), 'max': np.float64(39.28)}
+mean_perimeter -> {'count': 198, 'mean': np.float64(114.85656565656565), 'std': np.float64(21.383401559552883), 'min': np.float64(71.9), '25%': np.float64(98.16), '50%': np.float64(113.7), '75%': np.float64(129.64999999999998), 'max': np.float64(182.1)}
+mean_area -> {'count': 198, 'mean': np.float64(970.0409090909089), 'std': np.float64(352.14921516208284), 'min': np.float64(361.6), '25%': np.float64(702.525), '50%': np.float64(929.0999999999999), '75%': np.float64(1193.5), 'max': np.float64(2250.0)}
+mean_smoothness -> {'count': 198, 'mean': np.float64(0.10268141414141414), 'std': np.float64(0.012522431569239916), 'min': np.float64(0.07497), '25%': np.float64(0.0939), '50%': np.float64(0.10189999999999999), '75%': np.float64(0.110975), 'max': np.float64(0.1447)}
+mean_compactness -> {'count': 198, 'mean': np.float64(0.14264777777777776), 'std': np.float64(0.049897601888512416), 'min': np.float64(0.04605), '25%': np.float64(0.11019999999999999), '50%': np.float64(0.13175), '75%': np.float64(0.17220000000000002), 'max': np.float64(0.3114)}
+mean_concavity -> {'count': 198, 'mean': np.float64(0.15624277777777776), 'std': np.float64(0.07057226120534643), 'min': np.float64(0.02398), '25%': np.float64(0.10685), '50%': np.float64(0.15134999999999998), '75%': np.float64(0.2005), 'max': np.float64(0.4268)}
+mean_concave_points -> {'count': 198, 'mean': np.float64(0.08677560606060604), 'std': np.float64(0.03387663129061639), 'min': np.float64(0.02031), '25%': np.float64(0.06367), '50%': np.float64(0.086075), '75%': np.float64(0.103925), 'max': np.float64(0.2012)}
+
+===== EDA: Categorical (outcome) =====
+outcome -> {'count': 198, 'unique': 2, 'top': 'N', 'freq': 151}
+
+Correlation between mean_perimeter and se_perimeter = 0.6100
+
+Train Data:
+  Total examples: 153
+  # of positives (R=1): 35.0 (22.9%)
+  # of negatives (N=0): 118.0 (77.1%)
+
+Test Data:
+  Total examples: 37
+  # of positives (R=1): 8.0 (21.6%)
+  # of negatives (N=0): 29.0 (78.4%)
+
+===== Logistic Regression with ONE VARIABLE (mean_area) =====
+First 5 cost values: [np.float64(0.7113169150691134), np.float64(0.5933758111125984), np.float64(0.5930299949945264), np.float64(0.5896054613594027), np.float64(0.5892186877925937)]
+Last cost value: 0.5850345796800996
+Confusion Matrix / Metrics (TRAIN): {'TP': 10, 'FP': 57, 'FN': 25, 'TN': 61, 'accuracy': 0.46405228758169936, 'precision': 0.14925373134328357, 'recall': 0.2857142857142857, 'f1_score': 0.196078431372549}
+Confusion Matrix / Metrics (TEST): {'TP': 2, 'FP': 13, 'FN': 6, 'TN': 16, 'accuracy': 0.4864864864864865, 'precision': 0.13333333333333333, 'recall': 0.25, 'f1_score': 0.1739130434782609}
+
+===== Logistic Regression with MULTIPLE VARIABLES (12) =====
+Final cost: 0.5148958597693898
+Confusion Matrix / Metrics (TRAIN): {'TP': 16, 'FP': 33, 'FN': 19, 'TN': 85, 'accuracy': 0.6601307189542484, 'precision': 0.32653061224489793, 'recall': 0.45714285714285713, 'f1_score': 0.3809523809523809}
+Confusion Matrix / Metrics (TEST): {'TP': 3, 'FP': 8, 'FN': 5, 'TN': 21, 'accuracy': 0.6486486486486487, 'precision': 0.2727272727272727, 'recall': 0.375, 'f1_score': 0.3157894736842105}
+
+===== Forward Selection (accuracy-based) =====
+Selected features (forward): ['mean_texture']
+History: [{'added': 'mean_texture', 'current_accuracy': 0.7581699346405228, 'features_set': ['mean_texture']}]
+Forward Selection - TRAIN: {'TP': 1, 'FP': 3, 'FN': 34, 'TN': 115, 'accuracy': 0.7581699346405228, 'precision': 0.25, 'recall': 0.02857142857142857, 'f1_score': 0.05128205128205128}
+Forward Selection - TEST: {'TP': 0, 'FP': 1, 'FN': 8, 'TN': 28, 'accuracy': 0.7567567567567568, 'precision': 0.0, 'recall': 0.0, 'f1_score': 0.0}
+
+Compare test accuracy or F1 from test_metrics_multi vs. eval_fs['test_metrics'].
+
+===== Regularization (L2) on 12-feature model =====
+Regularized TRAIN: {'TP': 16, 'FP': 33, 'FN': 19, 'TN': 85, 'accuracy': 0.6601307189542484, 'precision': 0.32653061224489793, 'recall': 0.45714285714285713, 'f1_score': 0.3809523809523809}
+Regularized TEST: {'TP': 3, 'FP': 8, 'FN': 5, 'TN': 21, 'accuracy': 0.6486486486486487, 'precision': 0.2727272727272727, 'recall': 0.375, 'f1_score': 0.3157894736842105}
+
+===== Feature Scaling (12-feature model) =====
+Scaled Model TRAIN: {'TP': 35, 'FP': 118, 'FN': 0, 'TN': 0, 'accuracy': 0.22875816993464052, 'precision': 0.22875816993464052, 'recall': 1.0, 'f1_score': 0.3723404255319149}
+Scaled Model TEST: {'TP': 8, 'FP': 29, 'FN': 0, 'TN': 0, 'accuracy': 0.21621621621621623, 'precision': 0.21621621621621623, 'recall': 1.0, 'f1_score': 0.35555555555555557}
+
+===== MSE Cost for Logistic Regression (12 features) =====
+MSE-based TRAIN: {'TP': 10, 'FP': 11, 'FN': 25, 'TN': 107, 'accuracy': 0.7647058823529411, 'precision': 0.47619047619047616, 'recall': 0.2857142857142857, 'f1_score': 0.3571428571428571}
+MSE-based TEST: {'TP': 2, 'FP': 4, 'FN': 6, 'TN': 25, 'accuracy': 0.7297297297297297, 'precision': 0.3333333333333333, 'recall': 0.25, 'f1_score': 0.28571428571428575}
+Compare to cross-entropy-based results to see if there is any difference.
